@@ -135,6 +135,6 @@ PAYCOM_SETTINGS = {
     # 'SECRET_KEY': env.str('KEY'), # Production key
     'SECRET_KEY': env.str('TEST_KEY'),  # Test key
     'ACCOUNTS': {
-        'KEY': 'payment_id'
+        'KEY': 'order_id'
     }
 }
