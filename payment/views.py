@@ -15,5 +15,5 @@ def cancel_payment(self, account, transaction, *args, **kwargs):
     print(account)
 
 
-class PaymentView(MerchantAPIView):
+class TestView(MerchantAPIView):
     VALIDATE_CLASS = CheckOrder
