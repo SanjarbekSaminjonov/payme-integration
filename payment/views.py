@@ -5,7 +5,7 @@ from order.models import Order
 
 class CheckOrder(Paycom):
     def check_order(self, amount, account, **kwargs):
-        if len(Order.objects.filter(id=account.order_id)):
+        if len(Order.objects.filter(id=account['order_id'])):
             return self.ORDER_FOUND
         else:
             return self.ORDER_NOT_FOND
