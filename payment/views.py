@@ -5,10 +5,10 @@ from order.models import Order
 
 class CheckOrder(Paycom):
     def check_order(self, amount, account, **kwargs):
-        if Order.objects.filter(id=account.order_id).exists():
+        if len(Order.objects.filter(id=account.order_id)):
             return self.ORDER_FOUND
         else:
-            return self.ORDER_FOUND
+            return self.ORDER_NOT_FOND
 
 
 def successfully_payment(self, account, transaction, *args, **kwargs):
