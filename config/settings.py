@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # 3rd apps
     'rest_framework',
     'paycomuz',
+    'corsheaders',
 
     # local apps
     'payment',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -129,6 +131,8 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# Payme settings
 PAYCOM_SETTINGS = {
     'TOKEN': env.str('ID'),  # Merchant ID
     'KASSA_ID': env.str('ID'),  # Merchant ID
@@ -138,3 +142,8 @@ PAYCOM_SETTINGS = {
         'KEY': 'order_id'
     }
 }
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
