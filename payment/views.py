@@ -15,13 +15,13 @@ class CheckOrder(Paycom):
             return self.ORDER_NOT_FOND
 
     def successfully_payment(self, account, transaction, *args, **kwargs):
-        order_id = int(account['order_id'])
+        order_id = int(transaction.order_key)
         order = Order.objects.filter(id=order_id).first()
         order.is_payed = True
         order.save()
 
     def cancel_payment(self, account, transaction, *args, **kwargs):
-        order_id = int(account['order_id'])
+        order_id = int(transaction.order_key)
         order = Order.objects.filter(id=order_id).first()
         order.is_payed = False
         order.save()
