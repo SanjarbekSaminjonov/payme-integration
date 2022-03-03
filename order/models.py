@@ -13,4 +13,4 @@ class Order(models.Model):
     customer_passport = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.amount} - {self.customer_full_name}"
+        return f"{self.id} - {self.amount} - {self.customer_full_name}"

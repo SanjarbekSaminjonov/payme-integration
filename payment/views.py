@@ -13,19 +13,15 @@ class CheckOrder(Paycom):
         else:
             return self.ORDER_NOT_FOND
 
+    def successfully_payment(self, account, transaction, *args, **kwargs):
+        order = Order.objects.filter(id=account['order_id']).first()
+        order.is_payed = True
+        order.save()
 
-def successfully_payment(self, account, transaction, *args, **kwargs):
-    order = Order.objects.filter(id=account['order_id']).first()
-    order.is_payed = True
-    order.save()
-    print(account)
-
-
-def cancel_payment(self, account, transaction, *args, **kwargs):
-    order = Order.objects.filter(id=account['order_id']).first()
-    order.is_payed = False
-    order.save()
-    print(account)
+    def cancel_payment(self, account, transaction, *args, **kwargs):
+        order = Order.objects.filter(id=account['order_id']).first()
+        order.is_payed = False
+        order.save()
 
 
 class TestView(MerchantAPIView):
