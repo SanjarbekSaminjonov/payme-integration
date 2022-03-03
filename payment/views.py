@@ -1,17 +1,27 @@
 from paycomuz.views import MerchantAPIView
 from paycomuz import Paycom
+from order.models import Order
 
 
 class CheckOrder(Paycom):
     def check_order(self, amount, account, **kwargs):
-        return self.ORDER_FOUND
+        if Order.objects.filter(id=account.order_id).exists():
+            return self.ORDER_FOUND
+        else:
+            return self.ORDER_FOUND
 
 
 def successfully_payment(self, account, transaction, *args, **kwargs):
+    order = Order.objects.filter(id=account.order_id).first()
+    order.is_payed = True
+    order.save()
     print(account)
 
 
 def cancel_payment(self, account, transaction, *args, **kwargs):
+    order = Order.objects.filter(id=account.order_id).first()
+    order.is_payed = False
+    order.save()
     print(account)
 
 
