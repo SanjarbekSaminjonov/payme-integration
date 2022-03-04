@@ -3,12 +3,22 @@ from paycomuz import Paycom
 from order.models import Order
 
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+from decimal import Decimal
+from environs import Env
+
+env = Env()
+env.read_env()
+
+
 class CheckOrder(Paycom):
     def check_order(self, amount, account, **kwargs):
         order_id = int(account['order_id'])
         order = Order.objects.filter(id=order_id).first()
         if order is not None:
-            if str(amount) != order.amount:
+            if Decimal(amount) != Decimal(order.amount):
                 return self.INVALID_AMOUNT
             return self.ORDER_FOUND
         else:
@@ -27,5 +37,20 @@ class CheckOrder(Paycom):
         order.save()
 
 
-class TestView(MerchantAPIView):
+class PaymentView(MerchantAPIView):
     VALIDATE_CLASS = CheckOrder
+
+
+@api_view(['POST'])
+def checkout_view(request):
+    data = request.data
+    if 'id' in data and 'amount' in data:
+        order_id = data['id']
+        amount = Decimal(data['amount'])
+        if 'return_url' in data:
+            return_url = data['return_url']
+        else:
+            return_url = env.str('DEFAULT_URL')
+        paycom = Paycom()
+        data['url'] = paycom.create_initialization(amount=amount, order_id=order_id, return_url=return_url)
+    return Response(data)

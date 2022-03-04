@@ -11,6 +11,7 @@ class Order(models.Model):
     place_name = models.CharField(max_length=1000, blank=True, null=True)
     customer_full_name = models.CharField(max_length=255, blank=True, null=True)
     customer_passport = models.CharField(max_length=255, blank=True, null=True)
+    customer_phone_number = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.id} - {self.amount} - {self.customer_full_name}"
+        return f"Order {self.id} - {self.amount} - {self.customer_full_name} - {self.customer_phone_number}"

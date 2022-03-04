@@ -137,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PAYCOM_SETTINGS = {
     'TOKEN': env.str('ID'),  # Merchant ID
     'KASSA_ID': env.str('ID'),  # Merchant ID
-    # 'SECRET_KEY': env.str('KEY'), # Production key
+    # 'SECRET_KEY': env.str('KEY'),  # Production key
     'SECRET_KEY': env.str('TEST_KEY'),  # Test key
     'ACCOUNTS': {
         'KEY': 'order_id'
