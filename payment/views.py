@@ -18,7 +18,7 @@ class CheckOrder(Paycom):
         order_id = int(account['order_id'])
         order = Order.objects.filter(id=order_id).first()
         if order is not None:
-            if Decimal(amount) != Decimal(order.amount):
+            if Decimal(amount) != Decimal(order.amount_for_payme):
                 return self.INVALID_AMOUNT
             return self.ORDER_FOUND
         else:
