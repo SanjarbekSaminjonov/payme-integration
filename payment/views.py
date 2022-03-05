@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 
 from decimal import Decimal
 from environs import Env
+from .sentMessage import sent_message
 
 env = Env()
 env.read_env()
@@ -29,6 +30,8 @@ class CheckOrder(Paycom):
         order = Order.objects.filter(id=order_id).first()
         order.is_payed = True
         order.save()
+
+        sent_message(order)
 
     def cancel_payment(self, account, transaction, *args, **kwargs):
         order_id = int(transaction.order_key)
