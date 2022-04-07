@@ -5,8 +5,8 @@ from django.db import models
 
 class Order(models.Model):
     is_payed = models.BooleanField(default=False, blank=True, null=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    amount_for_payme = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    amount = models.DecimalField(max_digits=50, decimal_places=2, blank=True, null=True)
+    amount_for_payme = models.DecimalField(max_digits=50, decimal_places=2, blank=True, null=True)
     number_of_people = models.IntegerField(default=1, blank=True, null=True)
     place_id = models.IntegerField(blank=True, null=True)
     place_name = models.CharField(max_length=1000, blank=True, null=True)
