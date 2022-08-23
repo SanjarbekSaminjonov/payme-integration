@@ -23,13 +23,22 @@ export TEST_KEY=TEST_KEY
 
 Merchant_ID, KEY and TEST_KEY are credentials that payme gave you
 
-### 3. Migrite migrations
+### 3. Create virtual environment and Install required packages from requirements.txt
+
+```Shell
+virtualenv venv
+venv/Scripts/activate # on windows cmd
+source venv/bin/activate # on linux or mac os terminal
+pip install -r requirements
+```
+
+### 4. Migrite migrations
 
 ```Python
 python manage.py migrate
 ```
 
-### 4. Create Paycom user
+### 5. Create Paycom user
 
 - Username - Paycom
 - Password - KEY or TEST_KEY
